@@ -1,0 +1,54 @@
+#GCP:
+#/usr/hdp/3.1.4.0-315/kafka/libs/kafka_2.11-2.0.0.3.1.4.0-315.jar
+#/usr/hdp/3.1.4.0-315/kafka/libs/scala-library-2.11.12.jar
+#/usr/hdp/3.1.4.0-315/spark2/jars/spark-core_2.11-2.3.2.3.1.4.0-315.jar
+#
+#SANDBOX:
+#/usr/hdp/3.0.1.0-187/kafka/libs/kafka_2.11-1.1.1.3.0.1.0-187.jar
+#/usr/hdp/3.0.1.0-187/kafka/libs/scala-library-2.11.12.jar
+#/usr/hdp/3.0.1.0-187/spark2/jars/spark-core_2.11-2.3.1.3.0.1.0-187.jar
+
+#export HDP_VERSION=3.1.4.0-315 #GCP
+export HDP_VERSION=3.0.1.0-187 #Sandbox
+
+export SCALA_VERSION=2.11 #GCP and Sandbox
+
+#export KAFKA_MAJOR=2.0.0 #GCP
+export KAFKA_MAJOR=1.1.1 #Sandbox
+
+#export SPARK_MAJOR=2.3.2 #GCP
+export SPARK_MAJOR=2.3.1 #Sandbox
+
+
+export JAVA_HOME=/usr/java/default/
+echo $JAVA_HOME
+
+export PATH=$PATH:$JAVA_HOME/bin:/usr/hdp/$HDP_VERSION/kafka/libs/:/usr/hdp/$HDP_VERSION/spark2/jars/:
+echo $PATH
+
+export SPARK_HOME="/usr/hdp/current/spark2-client"
+export SPARK_MAJOR_VERSION=2
+
+export CP=/usr/hdp/$HDP_VERSION/spark2/jars/spark-core_$SCALA_VERSION-$SPARK_MAJOR.$HDP_VERSION.jar #spark-core_$SCALA_VERSION-2.3.$SPARK_MAJOR.4.0-315.jar
+export CP=$CP:/usr/hdp/$HDP_VERSION/spark2/jars/spark-hive_$SCALA_VERSION-$SPARK_MAJOR.$HDP_VERSION.jar
+export CP=$CP:/usr/hdp/$HDP_VERSION/spark2/jars/spark-mllib_$SCALA_VERSION-$SPARK_MAJOR.$HDP_VERSION.jar
+export CP=$CP:/usr/hdp/$HDP_VERSION/spark2/jars/spark-sql_$SCALA_VERSION-$SPARK_MAJOR.$HDP_VERSION.jar
+export CP=$CP:/usr/hdp/$HDP_VERSION/spark2/jars/spark-streaming_$SCALA_VERSION-$SPARK_MAJOR.$HDP_VERSION.jar
+export CP=$CP:/usr/hdp/$HDP_VERSION/kafka/libs/kafka_$SCALA_VERSION-$KAFKA_MAJOR.$HDP_VERSION.jar #kafka_$SCALA_VERSION-2.0.0.3.1.4.0-315.jar
+export CP=$CP:/usr/hdp/$HDP_VERSION/kafka/libs/kafka-clients-$KAFKA_MAJOR.$HDP_VERSION.jar
+export CP=$CP:/usr/hdp/$HDP_VERSION/kafka/libs/kafka-streams-$KAFKA_MAJOR.$HDP_VERSION.jar
+export CP=$CP:/usr/hdp/$HDP_VERSION/kafka/libs/kafka-tools-$KAFKA_MAJOR.$HDP_VERSION.jar
+export CP=$CP:/usr/hdp/$HDP_VERSION/kafka/libs/log4j-1.2.17.jar
+export CP=$CP:/usr/hdp/$HDP_VERSION/kafka/libs/slf4j-api-1.7.25.jar
+export CP=$CP:/usr/hdp/$HDP_VERSION/kafka/libs/scala-library-$SCALA_VERSION.12.jar
+
+export CLASSPATH=$CP
+#echo CLASSPATH=$CLASSPATH
+
+export CLASS_PATH=$CP
+echo CLASS_PATH=$CLASS_PATH
+
+export CP=/opt/training/spark/spark-streaming_2.11-0.1.jar:$CLASS_PATH
+echo CP: $CP
+
+java -cp $CP com.cirrus.training.DataProducer config.properties

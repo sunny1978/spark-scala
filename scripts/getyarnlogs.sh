@@ -1,0 +1,1 @@
+yarn logs -applicationId $1 > yarn.logs.$1
